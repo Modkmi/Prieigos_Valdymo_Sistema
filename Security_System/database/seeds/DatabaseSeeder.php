@@ -12,9 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        DB::table('rooms')->insert([
-            'Name' => str_random(10),
-            'Floor' => rand(1,16),
-        ]);
+
+        //factory(App\User::class, 10)->create();
+
+        $rooms = App\Room::all();
+
+        App\User::all()->each(function ($user) use ($rooms){
+            $user->rooms()->attach(
+                $rooms->random(rand(1,3))->pluck('id')->toArray()
+            );
+        });
     }
 }
