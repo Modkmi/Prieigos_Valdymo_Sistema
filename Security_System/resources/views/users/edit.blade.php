@@ -23,11 +23,11 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('rfid_code', 'rfid_code') }}
+            {{ Form::label('rfid_code', 'Rfid Code') }}
             {{ Form::text('rfid_code', null, array('class' => 'form-control')) }}
         </div>
 
-        {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
+        {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
 
         {{ Form::close() }}
 

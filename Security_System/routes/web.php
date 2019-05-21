@@ -18,7 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('patalpa/create', 'PatalpaController@create')->name('patalpa.create');
+Route::get('/rooms','RoomController@index');
+Route::get('/adminrooms','AdminRoomController@index');
+Route::resource('adminrooms','AdminRoomController');
+Route::resource('rooms','RoomController');
 Route::resource('users', 'UserController');
 Route::prefix('admin')->group(function(){
     Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');

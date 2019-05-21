@@ -44,5 +44,15 @@ class UserController extends Controller
             ->with('flash_message',
                 'User successfully edited.');
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id)->rooms()->Detach();
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index')
+            ->with('flash_message',
+                'User successfully deleted.');
+    }
 }
 
