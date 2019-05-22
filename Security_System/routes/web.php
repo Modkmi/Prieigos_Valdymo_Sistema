@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/rooms','RoomController@index');
 Route::get('/adminrooms','AdminRoomController@index');
 Route::resource('adminrooms','AdminRoomController');
+Route::get('/access','AccessController@index');
+Route::resource('access','AccessController');
 Route::resource('rooms','RoomController');
 Route::resource('users', 'UserController');
 Route::prefix('admin')->group(function(){

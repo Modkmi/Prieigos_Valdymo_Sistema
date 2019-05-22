@@ -23,7 +23,8 @@
         </div>
 
         <div class="form-group">
-            <select class="form-control">
+            <select class="form-control" name="users">
+                <option selected disabled>Please select a user</option>
                 @foreach($allUsers as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
@@ -57,3 +58,11 @@
     </div>
 
 @endsection
+
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+        alert(msg);
+    }
+</script>

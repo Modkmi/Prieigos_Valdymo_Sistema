@@ -55,6 +55,8 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
                                             <a href="{{ route('users.index') }}"><i class="fa fa-btn fa-unlock"></i>Manage Users</a>
+                                            <a href="{{ route('adminrooms.index') }}"><i class="fa fa-btn fa-unlock"></i>Manage Rooms</a>
+                                            <a href="{{ route('access.index') }}"><i class="fa fa-btn fa-unlock"></i>Access Log</a>
                                             <a href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

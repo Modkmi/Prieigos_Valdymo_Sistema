@@ -8,6 +8,11 @@ use Illuminate\View\View;
 use App\User;
 class AdminRoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +67,6 @@ class AdminRoomController extends Controller
         $room = Room::findOrFail($id);
         $users = Room::find($id)->Users()->get();
         $allUsers = User::all(['id','name']);
-        //dd(compact('room','users'));
         return view('adminrooms.edit',compact('room','users','allUsers'));
     }
 
@@ -73,9 +77,23 @@ class AdminRoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, $id)
     {
-        //
+        $room = Room::findOrFail($id);
+        $this->validate($request, [
+            'name'=>'required|max:120',
+            'floor'=>'required'
+        ]);
+        $input = $request->only(['name', 'floor']);
+        $userid = $request->get('users');
+        if($room->users()->where('id',$userid)->exists()){
+            return redirect()->back()->with('alert','This user is already asigned to this room');
+        }
+        $room->users()->attach($userid);
+        $room->fill($input)->save();
+        return redirect()->route('adminrooms.index')
+            ->with('flash_message',
+                'User successfully edited.');
     }
 
     /**
@@ -84,8 +102,8 @@ class AdminRoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy($id)
     {
-        //
+        echo $id;
     }
 }
